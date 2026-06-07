@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Build outputs
+dist/
+dist-ssr/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+!.env.local.example
+!web/.env.local
+
+# Runtime data
+# The demo SQLite snapshots under backend/data are intentionally committed so
+# reviewers can reproduce the current mock product state immediately.
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
