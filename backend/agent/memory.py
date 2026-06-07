@@ -22,7 +22,7 @@ class MemoryManager:
     """SQLite-backed memory store. Survives restarts."""
 
     def __init__(self):
-        self._db_path = os.path.join(BASE_DIR, "data", "memories.db")
+        self._db_path = os.environ.get("WEEKENDGO_MEMORY_DATABASE_PATH") or os.path.join(BASE_DIR, "data", "memories.db")
         os.makedirs(os.path.dirname(self._db_path), exist_ok=True)
         self._init_db()
         self._load()

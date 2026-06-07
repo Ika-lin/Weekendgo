@@ -19,7 +19,7 @@ if os.path.exists(env_path):
                     os.environ[key] = value
 
 # SQLite 数据库
-DATABASE_PATH = os.path.join(BASE_DIR, 'data', 'meituan_v2.db')
+DATABASE_PATH = os.environ.get('WEEKENDGO_DATABASE_PATH') or os.path.join(BASE_DIR, 'data', 'meituan_v2.db')
 SQLALCHEMY_DATABASE_URI = f'sqlite:///{DATABASE_PATH}'
 
 # DeepSeek API
