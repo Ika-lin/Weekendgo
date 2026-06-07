@@ -4,6 +4,28 @@
 
 Weekendgo is an AI-native local-life planning demo. It turns a natural-language goal such as "I have two free hours this afternoon, with a child and friends, please arrange food and activities nearby" into an executable short-trip plan.
 
+## Online Demo
+
+Demo preview:
+
+```text
+https://web-beryl-zeta-76.vercel.app
+```
+
+Backend health check:
+
+```text
+https://weekendgo-agent-clean.vercel.app/api/v1/health
+```
+
+The Vercel frontend is configured to call the deployed backend at:
+
+```text
+https://weekendgo-agent-clean.vercel.app/api/v1
+```
+
+If the backend is temporarily unavailable, the frontend falls back to built-in mock preview data so the submitted demo remains browsable.
+
 The product includes:
 
 - Demo login and first-login profile generation.
@@ -92,6 +114,7 @@ FLASK_DEBUG=true
 Frontend `web/.env.local`:
 
 ```text
+VITE_API_BASE_URL=https://your-backend-domain/api/v1
 VITE_AMAP_KEY=your-amap-js-api-key
 VITE_AMAP_SECURITY_CODE=your-amap-security-js-code
 ```
