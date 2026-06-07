@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: weekendgo-agent
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: FLASK_DEBUG
+        value: false
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: DEEPSEEK_MODEL
+        value: deepseek-v4-flash
+      - key: DEEPSEEK_API_KEY
+        sync: false

@@ -4,7 +4,7 @@
 import os
 import sys
 import io
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 
 # 解决 Windows GBK 编码问题
@@ -15,10 +15,12 @@ from models import db
 
 # 确保 data 目录存在
 os.makedirs(os.path.join(os.path.dirname(__file__), 'data'), exist_ok=True)
+FRONTEND_DIST = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'web', 'dist'))
 
 
 def create_app():
-    app = Flask(__name__)
+    frontend_dist = FRONTEND_DIST if os.path.exists(os.path.join(FRONTEND_DIST, 'index.html')) else None
+    app = Flask(__name__, static_folder=None)
     app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = SECRET_KEY
@@ -46,6 +48,27 @@ def create_app():
     @app.route('/api/v1/health')
     def health():
         return jsonify({'code': 0, 'message': 'ok', 'data': {'status': 'healthy'}})
+
+    @app.route('/')
+    def serve_index():
+        if frontend_dist:
+            return send_from_directory(frontend_dist, 'index.html')
+        return jsonify({
+            'code': 0,
+            'message': 'Weekendgo API is running. Build web/dist to enable the frontend.',
+            'data': {'apiBase': '/api/v1'}
+        })
+
+    @app.route('/<path:path>')
+    def serve_frontend(path):
+        if path.startswith('api/'):
+            return jsonify({'code': 404, 'message': 'API route not found', 'data': None}), 404
+        if frontend_dist:
+            candidate = os.path.join(frontend_dist, path)
+            if os.path.exists(candidate) and os.path.isfile(candidate):
+                return send_from_directory(frontend_dist, path)
+            return send_from_directory(frontend_dist, 'index.html')
+        return jsonify({'code': 404, 'message': 'Frontend is not built', 'data': None}), 404
 
     # 初始化数据库
     with app.app_context():

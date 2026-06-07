@@ -55,6 +55,28 @@ Then open:
 http://127.0.0.1:5174/
 ```
 
+## One-Service Online Deployment
+
+For a complete online demo, deploy this repository to Render as a Docker Web Service.
+The included `Dockerfile` builds the Vue frontend and runs the Flask backend with
+Gunicorn, so one public URL serves both the app UI and `/api/v1` APIs.
+
+Recommended Render setup:
+
+```text
+New Web Service -> connect this GitHub repo -> Docker runtime
+Branch: main
+Dockerfile: ./Dockerfile
+Health check path: /api/v1/health
+Plan: Free
+```
+
+The `render.yaml` blueprint is included for one-click setup. `DEEPSEEK_API_KEY`
+is intentionally left as a private Render environment variable. If it is empty,
+the demo still runs with deterministic mock planning and fallback text.
+
+Render free services may sleep after inactivity, so the first visit can be slow.
+
 ## Environment Variables
 
 Backend `.env`:

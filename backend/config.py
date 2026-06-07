@@ -31,7 +31,7 @@ DEEPSEEK_BASE_URL = 'https://api.deepseek.com'
 DEEPSEEK_MODEL = 'deepseek-v4-pro'  # 最强模型, 支持思考模式 + function calling
 
 # Flask
-DEBUG = True
+DEBUG = os.environ.get('FLASK_DEBUG', 'true').lower() in ('1', 'true', 'yes', 'on')
 SECRET_KEY = 'meituan-hackathon-2026'
 JSON_AS_ASCII = False  # 支持中文输出
 
