@@ -1,5 +1,7 @@
 # Weekendgo Agent
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Ika-lin/Weekendgo)
+
 Weekendgo is an AI-native local-life planning demo. It turns a natural-language goal such as "I have two free hours this afternoon, with a child and friends, please arrange food and activities nearby" into an executable short-trip plan.
 
 The product includes:
