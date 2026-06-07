@@ -1,7 +1,7 @@
 /**
  * Weekendgo API 服务
  */
-const API_BASE = '/api/v1'
+const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '') || '/api/v1'
 
 export interface ApiEnvelope<T> {
   code: number
